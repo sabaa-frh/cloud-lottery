@@ -23,9 +23,19 @@ export default function App() {
     try {
       const res = await fetch(`${API}/entries`);
       const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || "Failed to load entries");
+      }
+
+      if (!Array.isArray(data)) {
+        throw new Error("Backend returned an unexpected entries response");
+      }
+
       setEntries(data);
-    } catch {
-      setError("Failed to load entries. Is the backend running?");
+    } catch (err) {
+      setEntries([]);
+      setError(err.message || "Failed to load entries. Is the backend running?");
     } finally {
       setLoading(false);
     }

@@ -1,0 +1,10 @@
+{
+  "name": "cloud-lottery-lambda",
+  "version": "1.0.0",
+  "description": "AWS Lambda function to resize S3 images using sharp",
+  "main": "index.js",
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.1053.0",
+    "sharp": "^0.33.5"
+  }
+}

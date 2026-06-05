@@ -76,6 +76,16 @@ async function deleteFromS3(imageUrl) {
 // ─── Routes ─────────────────────────────────────────────────────────────────
 
 // POST /entries — create entry
+app.get("/health", (req, res) => {
+  res.json({
+    status: "ok",
+    service: "cloud-lottery-backend",
+    timestamp: new Date().toISOString(),
+    region: REGION,
+    table: TABLE_NAME,
+  });
+});
+
 app.post("/entries", upload.single("image"), async (req, res) => {
   try {
     const { participantName, ticketNumber, email } = req.body;

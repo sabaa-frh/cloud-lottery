@@ -38,7 +38,7 @@ sleep 2
 echo ""
 echo ">>> Starting frontend on http://localhost:3001 ..."
 cd "$ROOT_DIR/frontend"
-npm start &
+PORT=3001 npm start &
 FRONTEND_PID=$!
 
 echo ""

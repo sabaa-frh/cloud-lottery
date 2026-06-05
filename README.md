@@ -104,9 +104,39 @@ node server.js
 ```bash
 cd frontend
 npm install
-npm start
+PORT=3001 npm start
 # Runs on http://localhost:3001
 ```
+
+---
+
+## Health Check
+
+The backend includes a lightweight health endpoint for local testing and AWS load balancer checks.
+
+```bash
+curl http://localhost:3000/health
+```
+
+Example URL:
+
+```
+http://localhost:3000/health
+```
+
+Example response:
+
+```json
+{
+  "status": "ok",
+  "service": "cloud-lottery-backend",
+  "timestamp": "2026-06-05T18:30:00.000Z",
+  "region": "us-east-1",
+  "table": "LotteryEntries"
+}
+```
+
+For AWS deployment, the Application Load Balancer target group health check path can be set to `/health`.
 
 ---
 
@@ -114,6 +144,7 @@ npm start
 
 | Method | Route | Description |
 |--------|-------|-------------|
+| `GET` | `/health` | Backend health check for local testing and ALB health checks |
 | `POST` | `/entries` | Create entry (multipart/form-data with `image`) |
 | `GET` | `/entries` | List all entries |
 | `GET` | `/entries/:id` | Get single entry |
